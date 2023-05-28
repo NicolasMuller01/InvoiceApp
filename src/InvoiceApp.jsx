@@ -40,6 +40,10 @@ function InvoiceApp() {
     })
     }
 
+  const invoiceHandlerDelete = (id)=>{
+    setItemValue(itemValue.filter(i => i.id !== id))
+  }
+
     useEffect(()=>{
         setDinamicTotalValue(invoiceTotal(itemValue));
     }, [itemValue])
@@ -62,7 +66,7 @@ function InvoiceApp() {
             <CompanyView name={invoice.company.name} fiscalNumber={invoice.company.fiscalNumber}></CompanyView>
           </div>
         </div>
-        <ListItemsView items={itemValue}></ListItemsView>
+        <ListItemsView items={itemValue} invoiceHandlerDelete = {idToDelete => invoiceHandlerDelete(idToDelete)}></ListItemsView>
         <TotalView total={dinamicTotal}></TotalView>
 
         <form onSubmit={ e => invoiceItemSubmit(e)}>
